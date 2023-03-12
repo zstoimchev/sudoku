@@ -90,16 +90,25 @@ public class Sudoku {
     }
 
     public static void print(int array[][]) {
+        System.out.println("\u001B[31m ----------------------------------------------------- \u001B[0m");
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length; j++) {
                 if ((j + 1) % 3 == 0) {
-                    System.out.print(array[i][j] + "\u001B[31m|\u001B[0m");
+                    System.out.print(array[i][j] + "\u001B[31m  |  \u001B[0m");
                 } else if (j == 0)
-                    System.out.print("\u001B[31m|\u001B[0m" + array[i][j] + "|");
+                    System.out.print("\u001B[31m|  \u001B[0m" + array[i][j] + "  |  ");
                 else
-                    System.out.print(array[i][j] + "|");
+                    System.out.print(array[i][j] + "  |  ");
             }
             System.out.println();
+            if ((i + 1) % 3 == 0 && i != array.length - 1)
+                System.out.println("\u001B[31m|-----------------|-----------------|-----------------|\u001B[0m");
+            else if (i==0)
+                System.out.println("\u001B[31m|\u001B[0m-----|-----|-----\u001B[31m|\u001B[0m-----|-----|-----\u001B[31m|\u001B[0m-----|-----|-----\u001B[31m|\u001B[0m");
+            else if(i!= array.length-1)
+                System.out.println("\u001B[31m|\u001B[0m-----|-----|-----\u001B[31m|\u001B[0m-----|-----|-----\u001B[31m|\u001B[0m-----|-----|-----\u001B[31m|\u001B[0m");
         }
+        System.out.println("\u001B[31m ----------------------------------------------------- \u001B[0m");
+
     }
 }
