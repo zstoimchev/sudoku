@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-//import javax.swing.text.StyledEditorKit.ForegroundAction;
 public class Sudoku {
     public static void main(String[] args) {
         int arr[][] = { { 4, 3, 6, 7, 5, 1, 9, 8, 2 },
@@ -15,6 +14,7 @@ public class Sudoku {
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to Sudoku!");
         while (!isSolved(arr)) {
+            System.out.print("Enter coordinates (x,y), and number (1-9): ");
             int i = scan.nextInt() - 1;
             int j = scan.nextInt() - 1;
             int num = scan.nextInt();
@@ -22,16 +22,12 @@ public class Sudoku {
                 System.out.println("\u001B[31mWrong Move!\u001B[0m");
                 continue;
             }
-
-            // arr[i][j] = num;
-
             if (isValid(arr, i, j, num))
                 arr[i][j] = num;
             else
                 System.out.println("Wrong number");
-
-            // print(arr);
         }
+
         System.out.println("You Win!");
         scan.close();
     }
@@ -75,15 +71,15 @@ public class Sudoku {
 
     public static boolean isValid(int arr[][], int i, int j, int x) {
         int countCol = 0; // counter for duplicates
-        int countRow = 0;
-        for (int k = 0; k < arr.length; k++) {
+        int countRow = 0; // counter for duplicates
+        for (int k = 0; k < arr.length; k++)
             if (arr[k][j] == x)
                 countCol += 1;
-        }
-        for (int k = 0; k < arr.length; k++) {
+
+        for (int k = 0; k < arr.length; k++)
             if (arr[i][k] == x)
                 countRow += 1;
-        }
+
         if (countRow + countCol > 0)
             return false;
         else
@@ -91,19 +87,21 @@ public class Sudoku {
     }
 
     public static void print(int array[][]) {
-        System.out.println("\u001B[31m\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u001B[0m");
+        System.out.println(
+                "\u001B[31m\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u001B[0m");
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length; j++) {
-                if ((j + 1) % 3 == 0) {
+                if ((j + 1) % 3 == 0)
                     System.out.print(array[i][j] + "\u001B[31m  \u2502  \u001B[0m");
-                } else if (j == 0)
+                else if (j == 0)
                     System.out.print("\u001B[31m\u2502  \u001B[0m" + array[i][j] + "  \u2502  ");
                 else
                     System.out.print(array[i][j] + "  \u2502  ");
             }
             System.out.println();
             if ((i + 1) % 3 == 0 && i != array.length - 1)
-                System.out.println("\u001B[31m\u251C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\u001B[0m");
+                System.out.println(
+                        "\u001B[31m\u251C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\u001B[0m");
             else if (i == 0)
                 System.out.println(
                         "\u001B[31m\u2502\u001B[0m\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u001B[31m\u2502\u001B[0m\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u001B[31m\u2502\u001B[0m\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u001B[31m\u2502\u001B[0m");
@@ -111,7 +109,8 @@ public class Sudoku {
                 System.out.println(
                         "\u001B[31m\u2502\u001B[0m\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u001B[31m\u2502\u001B[0m\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u001B[31m\u2502\u001B[0m\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u001B[31m\u2502\u001B[0m");
         }
-        System.out.println("\u001B[31m\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\u001B[0m");
+        System.out.println(
+                "\u001B[31m\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\u001B[0m");
 
     }
 }
